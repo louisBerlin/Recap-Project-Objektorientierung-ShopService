@@ -22,15 +22,46 @@ class ShopServiceTest {
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNull() {
+    void addOrderTest_whenInvalidProductId_expectExeption() {
+
+        try {
+            //GIVEN
+            ShopService shopService = new ShopService();
+            List<String> productsIds = List.of("1", "2");
+
+            //WHEN
+            Order actual = shopService.addOrder(productsIds);
+            fail("Es wurde eine Exception erwartet, aber keine geworfen!");
+        } catch (Exception e) {
+            // gut: der Fehlerzustand wurde gemeldet
+        }
+
+    }
+
+
+    @Test
+    void getAllOrderByStatus_with_status_start_should_answer_3() {
         //GIVEN
         ShopService shopService = new ShopService();
-        List<String> productsIds = List.of("1", "2");
+        assertEquals(shopService.getAllOrderByStatus("start").size(),3);    }
 
-        //WHEN
-        Order actual = shopService.addOrder(productsIds);
+    @Test
+    void getAllOrderByStatus_with_status_sended_should_answer_1() {
+        //GIVEN
+        ShopService shopService = new ShopService();
+        assertEquals(shopService.getAllOrderByStatus("sended").size(),1);    }
 
-        //THEN
-        assertNull(actual);
+
+    @Test
+    void updateOrder() {
+
+        ShopService shopService = new ShopService();
+        shopService.updateOrder("3","sended");
+
+        assertEquals(shopService.getAllOrderByStatus("sended").size(), 2);
+
+
     }
+
+
 }
