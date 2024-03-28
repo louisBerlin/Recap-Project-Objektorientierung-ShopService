@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductRepo {
     private List<Product> products;
@@ -7,16 +8,23 @@ public class ProductRepo {
     public ProductRepo() {
         products = new ArrayList<>();
         products.add(new Product("1", "Apfel"));
+        products.add(new Product("3", "Apfel"));
+        products.add(new Product("4", "Apfel"));
+        products.add(new Product("5", "Apfel"));
+
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
-    public Product getProductById(String id) {
+
+
+    // Modify the 'getProductById' method in your ProductRepo so that it returns an Optional<Product> if the product exists, otherwise an empty Optional.
+    public Optional<Product> getProductById(String id) {
         for (Product product : products) {
             if (product.id().equals(id)) {
-                return product;
+                return Optional.of(product);
             }
         }
         return null;

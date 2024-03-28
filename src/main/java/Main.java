@@ -5,6 +5,7 @@ public class Main {
         ShopService shopService = new ShopService();
 
 
+        shopService.updateOrder("3","sended");
 
     }
 }
